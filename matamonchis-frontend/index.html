@@ -1,19 +1,25 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Login</title>
-    <link rel="stylesheet" href="/style.css" />
-  </head>
-  <body>
-    <div class="login-box">
-      <h2>Iniciar sesión</h2>
-      <input type="text" id="username" placeholder="Usuario" />
-      <input type="password" id="password" placeholder="Contraseña" />
-      <button id="login-btn">Entrar</button>
-      <p id="error" class="error-msg"></p>
-    </div>
 
-    <script type="module" src="src/main.js"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <title>Login</title>
+  <link rel="stylesheet" href="src/style/style.css" />
+</head>
+
+<body>
+  <div class="login-box">
+    <img src="/src/Logo/Logo.png" alt="Logo Matamonchis" class="logo-login" />
+    <h2 class="welcome-msg">¡Bienvenido!</h2>
+    <h2>Iniciar sesión</h2>
+    <input type="text" id="username" placeholder="Usuario" />
+    <input type="password" id="password" placeholder="Contraseña" />
+    <p><a href="#" id="forgot-password-link">¿Olvidó su contraseña?</a></p>
+    <button id="login-btn">Entrar</button>
+    <p id="error" class="error-msg"></p>
+  </div>
+
+  <script type="module" src="src/main.js"></script>
+</body>
+
 </html>

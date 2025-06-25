@@ -1,0 +1,90 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+body {
+  margin: 0;
+  background-color: #f5f5f5;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Header */
+.matamonchis-header {
+  background-color: #2f343a;
+  color: #facf39;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 30px;
+}
+
+.logo-img {
+  width: 60px;
+  height: auto;
+}
+
+#user-info {
+  font-weight: bold;
+  color: #facf39;
+}
+
+.logout-btn {
+  background-color: #f9c307;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* Formulario */
+.usuario-container {
+  max-width: 500px;
+  margin: 50px auto;
+  background: #fff;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.usuario-container h1 {
+  color: #2f343a;
+  margin-bottom: 20px;
+}
+
+.formulario input,
+.formulario select {
+  width: 100%;
+  padding: 12px;
+  margin: 12px 0;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.btn-crear {
+  width: 100%;
+  background-color: #facf39;
+  border: none;
+  color: #000;
+  font-weight: bold;
+  padding: 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-crear:hover {
+  background-color: #f9c307;
+}
+
+.mensaje-usuario {
+  margin-top: 15px;
+  font-weight: bold;
+}

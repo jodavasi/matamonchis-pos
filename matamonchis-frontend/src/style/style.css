@@ -13,13 +13,13 @@ body {
   padding: 2rem;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  width: 300px;
+  width: 350px;
   text-align: center;
 }
 
 input {
-  width: 100%;
-  padding: 0.75rem;
+  width: 92%;
+  padding: 1rem;
   margin: 0.5rem 0;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -29,7 +29,7 @@ input {
 button {
   width: 100%;
   padding: 0.75rem;
-  background-color: #4CAF50;
+  background-color: #facf39;
   color: white;
   font-size: 1rem;
   border: none;
@@ -40,8 +40,9 @@ button {
 }
 
 button:hover {
-  background-color: #45a049;
+  background-color: #f9c307;
 }
+
 
 .error-msg {
   color: red;
@@ -51,4 +52,15 @@ button:hover {
 
 .hidden {
   display: none;
+}
+
+.logo-login {
+  width: 280px;
+  margin-bottom: 10px;
+}
+
+.welcome-msg {
+  font-size: 2rem;
+  margin: 0 0 15px 0;
+  color: #131313;
 }

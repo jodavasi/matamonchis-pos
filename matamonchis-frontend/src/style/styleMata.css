@@ -1,0 +1,104 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+.matamonchis-header {
+  background-color: #2f353b;
+  color: #fff;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo-img {
+  height: 80px;
+  width: auto;
+}
+
+#user-info {
+  font-weight: bold;
+  color: #fde79c;
+  margin-left: 2rem;
+}
+
+#logout-btn {
+  background-color: #f9c307;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#logout-btn:hover {
+  background-color: #facf39;
+}
+
+/* Contenedor de botones en main */
+.botones-container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem;
+  background-color: #ffffff;
+  margin: 1rem auto;
+  width: fit-content;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Botones principales */
+.boton-opcion {
+  background-color: #fbdb6b;
+  color: #000;
+  border: none;
+  padding: 0.7rem 1.2rem;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.boton-opcion:hover {
+  background-color: #facf39;
+}
+
+.logo-user-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+#user-info {
+  color: #facf39;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+#crear-usuario-btn, #crear-pedido-btn {
+  background-color: #f9c307;
+  color: #000;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 16px 32px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#crear-usuario-btn:hover, #crear-pedido-btn:hover {
+  background-color: #fbdb6b;
+  transform: scale(1.05);
+}

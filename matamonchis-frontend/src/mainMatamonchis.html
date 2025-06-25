@@ -1,17 +1,26 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Dashboard</title>
-  </head>
-  <body>
-    <div class="dashboard">
-      <h2>Bienvenido a La Matamonchis S.A.</h2>
-      <p id="user-info"></p>
-      <button id="logout-btn">Cerrar sesión</button>
-      <button id="crear-usuario-btn">Crear Usuario</button>
-    </div>
-    <script type="module" src="/src/mainMatamonchis.js"></script>
-    
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="/src/style/styleMata.css" />
+</head>
+<body>
+  <header class="matamonchis-header">
+    <a href="mainMatamonchis.html" class="logo-link">
+      <img src="/src/Logo/LogoBW.png" alt="Matamonchis Logo" class="logo-img" />
+    </a>
+
+    <p id="user-info">Usuario: ...</p>
+
+    <button id="logout-btn">Cerrar sesión</button>
+  </header>
+
+  <div class="botones-container">
+    <button id="crear-usuario-btn" class="boton-opcion">Crear Usuario</button>
+    <button id="crear-pedido-btn" class="boton-opcion">🛒 Nueva Venta</button>
+  </div>
+
+  <script type="module" src="/src/mainMatamonchis.js"></script>
+</body>
 </html>

@@ -1,0 +1,364 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+
+}
+
+h1 {
+  font-size: 2rem;
+  color: #2f353b;
+  margin: 1rem 2rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 3px solid #f9c307;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.icono-titulo {
+  font-size: 2.2rem;
+}
+
+#contenedor-venta {
+  display: flex;
+  gap: 40px;
+  justify-content: space-between;
+}
+
+/* ==== PRODUCTOS ==== */
+#productos-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+  flex: 2;
+}
+
+.producto-card {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.producto-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.producto-card img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  margin-bottom: 12px;
+}
+
+.producto-card p {
+  margin: 4px 0;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.control-cantidad {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.control-cantidad button {
+  background-color: #f9c307;
+  border: none;
+  color: #000;
+  padding: 8px 14px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.control-cantidad button:hover {
+  background-color: #facf39;
+  transform: scale(1.1);
+}
+
+.control-cantidad span {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* ==== RESUMEN ==== */
+#resumen-venta {
+  flex: 1;
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 8px;
+  min-width: 300px;
+  background-color: #fdfdfd;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+#resumen-venta table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 16px;
+}
+
+#resumen-venta th, #resumen-venta td {
+  border-bottom: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+  font-size: 14px;
+}
+
+#resumen-total {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+#finalizar-pedido {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  background-color: #f9c307;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#finalizar-pedido:hover {
+  background-color: #facf39;
+}
+.matamonchis-header {
+  background-color: #2f353b;
+  color: #fff;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo-img {
+  height: 80px;
+  width: auto;
+}
+
+#user-info {
+  font-weight: bold;
+  color: #fde79c;
+  margin-left: 2rem;
+}
+
+#logout-btn {
+  background-color: #f9c307;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#logout-btn:hover {
+  background-color: #facf39;
+}
+
+/* Contenedor de botones en main */
+.botones-container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem;
+  background-color: #ffffff;
+  margin: 1rem auto;
+  width: fit-content;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Botones principales */
+.boton-opcion {
+  background-color: #fbdb6b;
+  color: #000;
+  border: none;
+  padding: 0.7rem 1.2rem;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.boton-opcion:hover {
+  background-color: #facf39;
+}
+
+.logo-user-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+#user-info {
+  color: #facf39;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+#crear-usuario-btn, #crear-pedido-btn {
+  background-color: #f9c307;
+  color: #000;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 16px 32px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#crear-usuario-btn:hover, #crear-pedido-btn:hover {
+  background-color: #fbdb6b;
+  transform: scale(1.05);
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  color: #333;
+  margin: 15% auto;
+  padding: 20px;
+  border-radius: 10px;
+  width: 300px;
+  text-align: center;
+  box-shadow: 0px 0px 20px rgba(0,0,0,0.2);
+}
+
+#cerrar-modal {
+  background-color: #FFB800;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+#cerrar-modal:hover {
+  background-color: #e0a600;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+  background-color: white;
+  color: #333;
+  padding: 20px;
+  margin: 15% auto;
+  width: 300px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+}
+
+#cerrar-modal {
+  background-color: #FFB800;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#cerrar-modal:hover {
+  background-color: #e0a600;
+}
+
+#cliente-info {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+#cliente-info label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+}
+
+#nombre-cliente {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+#cliente-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+#cliente-info label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+#cliente-info input,
+#cliente-info select {
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#cliente-info select:focus,
+#cliente-info input:focus {
+  border-color: #ff6600;
+  outline: none;
+  box-shadow: 0 0 5px rgba(255, 102, 0, 0.5);
+}

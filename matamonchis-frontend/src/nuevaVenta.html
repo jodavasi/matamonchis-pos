@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Nueva Venta</title>
+  <link rel="stylesheet" href="/src/style/styleVenta.css">
+</head>
+
+<body>
+  <header class="matamonchis-header">
+    <a href="mainMatamonchis.html" class="logo-link">
+      <img src="/src/Logo/LogoBW.png" alt="Matamonchis Logo" class="logo-img" />
+    </a>
+    <button id="logout-btn">Cerrar sesión</button>
+  </header>
+  <h1><span class="icono-titulo">🛒</span> Nueva Venta</h1>
+  <div id="contenedor-venta">
+
+    <!-- Sección de productos -->
+    <div id="productos-container">
+      <!-- Aquí se insertan las tarjetas desde JS -->
+    </div>
+
+    <!-- Sección del resumen lateral -->
+    <div id="resumen-venta">
+      <table>
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Descuento</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody id="tabla-detalles">
+          <!-- Se llenará dinámicamente -->
+        </tbody>
+      </table>
+
+      <div id="resumen-total">
+        <strong>Total:</strong>
+        <span id="total-pedido">₡0</span>
+      </div>
+      <div id="cliente-info">
+        <label for="nombre-cliente">Nombre del Cliente:</label>
+        <input type="text" id="nombre-cliente" placeholder="Ej: Juan Pérez" required />
+        <label for="metodo-pago">Método de Pago:</label>
+        <select id="metodo-pago" required>
+          <option value="">Seleccione...</option>
+          <option value="Efectivo">Efectivo</option>
+          <option value="Tarjeta">Tarjeta</option>
+        </select>
+      </div>
+
+
+      <button id="finalizar-pedido">Terminar Pedido</button>
+    </div>
+  </div>
+  <div id="modal-exito" class="modal">
+    <div class="modal-content">
+      <p>✅ ¡Venta realizada con éxito!</p>
+      <button id="cerrar-modal">Aceptar</button>
+    </div>
+  </div>
+</body>
+<script type="module" src="nuevaVenta.js" defer></script>
+</html>

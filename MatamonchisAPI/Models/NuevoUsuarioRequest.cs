@@ -9,6 +9,7 @@ namespace MatamonchisAPI.Models
         public string Username { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
         public string Rol { get; set; } = "usuario";
+        public string Mail { get; set; } = string.Empty;
     }
 }
 
@@ -45,13 +46,15 @@ namespace MatamonchisAPI.Controllers
             {
                 conn.Open();
 
-                string sql = "INSERT INTO Usuarios (nombre, username, password_hash, rol) VALUES (@nombre, @username, @password, @rol)";
+                string sql = "INSERT INTO Usuarios (nombre, username, password_hash, rol, mail) VALUES (@nombre, @username, @password, @rol, @mail)";
                 using (SqlCommand cmd = new SqlCommand(sql, conn))
                 {
                     cmd.Parameters.AddWithValue("@nombre", nuevoUsuario.Nombre);
                     cmd.Parameters.AddWithValue("@username", nuevoUsuario.Username);
                     cmd.Parameters.AddWithValue("@password", hash);
                     cmd.Parameters.AddWithValue("@rol", nuevoUsuario.Rol);
+                    cmd.Parameters.AddWithValue("@mail", nuevoUsuario.Mail);
+                    
 
                     try
                     {

@@ -2,27 +2,35 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Crear Usuario - Matamonchis</title>
+  <title>Crear Usuario</title>
+  <link rel="stylesheet" href="/src/style/styleNewUser.css" />
 </head>
 <body>
-  <h1>Crear Nuevo Usuario</h1>
+  <header class="matamonchis-header">
+    <a href="mainMatamonchis.html" class="logo-link">
+      <img src="/src/Logo/LogoBW.png" alt="Matamonchis Logo" class="logo-img" />
+    </a>
+    <button id="logout-btn" class="logout-btn">Cerrar sesión</button>
+  </header>
 
-  <form id="crear-usuario-form">
-    <input type="text" id="nombre" placeholder="Nombre completo" required /><br />
-    <input type="text" id="username" placeholder="Nombre de usuario" required /><br />
-    <input type="password" id="password" placeholder="Contraseña" required /><br />
-    
-    <select id="rol" required>
-      <option value="cajero">Cajero</option>
-      <option value="admin">Administrador</option>
-    </select><br />
+  <main class="usuario-container">
+    <h1>Crear Nuevo Usuario</h1>
+    <form id="crear-usuario-form" class="formulario" >
+      <input type="text" id="nombre" placeholder="Nombre completo" required />
+      <input type="email" id="correo" placeholder="Correo electrónico" required />
+      <input type="text" id="username" autocomplete="off" placeholder="Nombre de usuario" required />
+      <input type="password" id="password" autocomplete="off" placeholder="Contraseña" required />
+      <input type="password" id="confirm-password" autocomplete="off" placeholder="Repita contraseña" required />
 
-    <button type="submit">Crear Usuario</button>
-  </form>
+      <select id="rol" required>
+        <option value="admin">Administrador</option>
+        <option value="cajero">Cajero</option>
+      </select>
+      <button type="submit" class="btn btn-crear">Crear Usuario</button>
+    </form>
+    <p id="mensaje" class="mensaje-usuario"></p>
+  </main>
 
-  <p id="mensaje"></p>
-
-  <!-- Carga del script (después del HTML para que los elementos existan) -->
-  <script type="module" src="crearUsuario.js"></script>
+  <script type="module" src="/src/crearUsuario.js"></script>
 </body>
 </html>
