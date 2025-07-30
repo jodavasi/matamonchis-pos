@@ -4,39 +4,54 @@ document.addEventListener("DOMContentLoaded", async () => {
   const totalVentaSpan = document.getElementById("total-pedido");
   const carrito = {}; // Objeto para mantener el estado del carrito
 
+  const btnTerminarVenta = document.getElementById("finalizar-pedido");
+  btnTerminarVenta.disabled = true;
+
+  const verificarEstadoBoton = () => {
+    const nombreCliente = document.getElementById("nombre-cliente").value.trim();
+    const metodoPago = document.getElementById("metodo-pago").value;
+    const hayProductos = Object.keys(carrito).length > 0;
+
+    btnTerminarVenta.disabled = !(nombreCliente && metodoPago && hayProductos);
+  };
   const actualizarTabla = () => {
-        tablaDetalles.innerHTML = "";
-        let total = 0;
+    tablaDetalles.innerHTML = "";
+    let total = 0;
 
-        Object.values(carrito).forEach(item => {
-          const fila = document.createElement("tr");
+    Object.values(carrito).forEach(item => {
+      const fila = document.createElement("tr");
 
-          const tdNombre = document.createElement("td");
-          tdNombre.textContent = item.nombre;
+      const tdNombre = document.createElement("td");
+      tdNombre.textContent = item.nombre;
 
-          const tdCantidad = document.createElement("td");
-          tdCantidad.textContent = item.cantidad;
+      const tdCantidad = document.createElement("td");
+      tdCantidad.textContent = item.cantidad;
 
-          const tdDescuento = document.createElement("td");
-          tdDescuento.textContent = "₡0.00";
+      const tdDescuento = document.createElement("td");
+      tdDescuento.textContent = "₡0.00";
 
-          const tdSubtotal = document.createElement("td");
-          const subtotal = item.precio * item.cantidad;
-          tdSubtotal.textContent = `₡${subtotal.toFixed(2)}`;
+      const tdSubtotal = document.createElement("td");
+      const subtotal = item.precio * item.cantidad;
+      tdSubtotal.textContent = `₡${subtotal.toFixed(2)}`;
 
-          total += subtotal;
+      total += subtotal;
 
-          fila.appendChild(tdNombre);
-          fila.appendChild(tdCantidad);
-          fila.appendChild(tdDescuento);
-          fila.appendChild(tdSubtotal);
+      fila.appendChild(tdNombre);
+      fila.appendChild(tdCantidad);
+      fila.appendChild(tdDescuento);
+      fila.appendChild(tdSubtotal);
 
-          tablaDetalles.appendChild(fila);
-        });
+      tablaDetalles.appendChild(fila);
 
-        document.getElementById("total-pedido").textContent = `₡${total.toFixed(2)}`;
-        totalVentaSpan.textContent = `₡${total.toFixed(2)}`;
-      };
+     
+    });
+
+    document.getElementById("total-pedido").textContent = `₡${total.toFixed(2)}`;
+    totalVentaSpan.textContent = `₡${total.toFixed(2)}`;
+
+    // Habilitar o deshabilitar el botón de finalizar venta
+    verificarEstadoBoton();
+  };
 
   // Obtener productos del backend
   try {
@@ -46,6 +61,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     productos.forEach((producto) => {
       const card = document.createElement("div");
       card.className = "producto-card";
+
+
 
       const imagen = document.createElement("img");
       imagen.src = `/src/Productos/${producto.nombre}.jpg`;
@@ -101,9 +118,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       controlCantidad.appendChild(cantidadSpan);
       controlCantidad.appendChild(btnMas);
 
+      card.appendChild(precio);
       card.appendChild(imagen);
       card.appendChild(nombre);
-      card.appendChild(precio);
       card.appendChild(controlCantidad);
 
       contenedorProductos.appendChild(card);
@@ -113,9 +130,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   // Finalizar Pedido
-  const btnTerminarVenta = document.getElementById("finalizar-pedido");
   const modalExito = document.getElementById("modal-exito");
   const cerrarModal = document.getElementById("cerrar-modal");
+  document.getElementById("nombre-cliente").addEventListener("input", verificarEstadoBoton);
+  document.getElementById("metodo-pago").addEventListener("change", verificarEstadoBoton);
 
   btnTerminarVenta.addEventListener("click", async () => {
     const nombreCliente = document.getElementById("nombre-cliente").value.trim();
@@ -178,4 +196,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   cerrarModal.addEventListener("click", () => {
     modalExito.style.display = "none";
   });
+
+
 });
