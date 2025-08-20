@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <title>Dashboard</title>
   <link rel="stylesheet" href="/src/style/styleMata.css" />
 </head>
+
 <body>
   <header class="matamonchis-header">
     <a href="mainMatamonchis.html" class="logo-link">
@@ -15,20 +17,38 @@
   </header>
 
   <div class="botones-container">
-    <button id="crear-usuario-btn"  class="boton-opcion" type="button">Crear Usuario</button>
-    <button id="editar-usuarios-btn"  class="boton-opcion" type="button">Editar Usuario</button>
-    <button id="crear-pedido-btn"    class="boton-opcion" type="button">Nueva Venta</button>
+    <button id="crear-usuario-btn" class="boton-opcion" type="button">Crear Usuario</button>
+    <button id="editar-usuarios-btn" class="boton-opcion" type="button">Editar Usuario</button>
+    <button id="crear-pedido-btn" class="boton-opcion" type="button">Nueva Venta</button>
   </div>
 
-  <section id="cards-analytics" class="cards">
-    <div class="card">
-      <div class="chart-wrapper"> 
-        <div class="chart-box">
-          <canvas id="ventasChart"></canvas>
+  <div>
+    <h1>REPORTES</h1>
+    <br>
+    <h2>Ventas por Vendedor</h2>
+    <section id="cards-analytics" class="cards">
+      <div class="card">
+        <div class="chart-wrapper">
+          <div class="chart-box">
+            <canvas id="ventasChart"></canvas>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+      <br>
+      <div class="card">
+        <h2 class="card-title">Unidades vendidas por producto</h2>
+        <div class="chart-wrapper">
+          <div class="chart-box">
+            <canvas id="chartProductosCant"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+  </div>
+
+
 
   <!-- URL base de tu API -->
   <script>window.API_BASE = "http://localhost:5128";</script>
@@ -37,4 +57,5 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script type="module" src="/src/mainMatamonchis.js"></script>
 </body>
+
 </html>

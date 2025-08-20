@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Data.SqlClient;   // o Microsoft.Data.SqlClient si usas ese paquete
 using Dapper;
+using MatamonchisAPI.Models;
 
 namespace MatamonchisAPI.Controllers
 {
@@ -39,5 +40,28 @@ namespace MatamonchisAPI.Controllers
             var data = await conn.QueryAsync<VentaPorVendedorDto>(sql);
             return Ok(data);
         }
+        [HttpGet("ventas-por-producto")]
+        public async Task<IActionResult> GetVentasPorProducto()
+        {
+            const string sql = @"
+        SELECT 
+            p.producto_id      AS ProductoId,
+            p.nombre           AS Producto,
+            SUM(dv.cantidad)   AS Cantidad
+        FROM DetalleVenta dv
+        INNER JOIN Productos p ON p.producto_id = dv.producto_id
+        INNER JOIN Ventas v    ON v.venta_id    = dv.venta_id
+        GROUP BY p.producto_id, p.nombre
+        ORDER BY Cantidad DESC;";
+
+            // Si en tu DetalleVenta tienes precio_unitario, usa esta línea en lugar de MontoCalc:
+            // SUM(dv.cantidad * dv.precio_unitario) AS Monto
+
+            using var conn = new SqlConnection(_cs);
+            var data = await conn.QueryAsync<VentaPorProducto>(sql);
+            return Ok(data);
+        }
     }
+
+
 }
