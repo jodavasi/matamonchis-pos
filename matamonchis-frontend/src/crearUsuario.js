@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("crear-usuario-form");
   const mensaje = document.getElementById("mensaje");
+  const logoutBtn = document.getElementById("logout-btn");
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -11,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const rol = document.getElementById("rol").value;
     const correo = document.getElementById("correo").value.trim();
     const confirmPassword = document.getElementById("confirm-password").value.trim();
+
 
 if (password !== confirmPassword) {
   mensaje.textContent = "❌ Las contraseñas no coinciden.";
@@ -48,5 +50,6 @@ if (password !== confirmPassword) {
       mensaje.style.color = "red";
       mensaje.textContent = "❌ Error de conexión al crear el usuario.";
     }
+    
   });
 });

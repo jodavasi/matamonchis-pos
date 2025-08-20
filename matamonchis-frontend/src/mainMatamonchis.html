@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <title>Dashboard</title>
   <link rel="stylesheet" href="/src/style/styleMata.css" />
 </head>
+
 <body>
   <header class="matamonchis-header">
     <a href="mainMatamonchis.html" class="logo-link">
@@ -21,6 +23,28 @@
     <button id="crear-pedido-btn" class="boton-opcion">🛒 Nueva Venta</button>
   </div>
 
+  <div class="chart-wrapper">
+    <canvas id="ventasPorVendedor"></canvas>
+    <canvas id="ventasPorVendedor"></canvas>
+    <section id="cards-analytics" class="cards">
+      <div class="card">
+        <h3 class="card-title">Ventas por Vendedor</h3>
+        <div class="chart-box">
+          <canvas id="ventasChart"></canvas>
+        </div>
+
+      </div>
+
+
+  </div>
+
+
+  <!-- URL base de tu API (ajústala a la real) -->
+  <script>window.API_BASE = "http://localhost:5128";</script>
+
+  <!-- Chart.js (debe ir antes del main) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script type="module" src="/src/mainMatamonchis.js"></script>
 </body>
+
 </html>

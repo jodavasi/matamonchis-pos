@@ -64,3 +64,19 @@ button:hover {
   margin: 0 0 15px 0;
   color: #131313;
 }
+
+.chart-section {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.chart-wrapper {
+  max-width: 900px;   /* controla el ancho */
+  margin: 0 auto;     /* centra horizontalmente */
+  padding: 20px;
+}
+
+.chart-wrapper canvas {
+  width: 100% !important;
+  height: 400px !important;
+}

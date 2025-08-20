@@ -1,19 +1,34 @@
 document.addEventListener("DOMContentLoaded", async () => {
-  const contenedorProductos = document.getElementById("productos-container");
-  const tablaDetalles = document.getElementById("tabla-detalles");
-  const totalVentaSpan = document.getElementById("total-pedido");
-  const carrito = {}; // Objeto para mantener el estado del carrito
+  //Helper de formato
+  const formatoMonto = (n) =>
+    Number(n || 0).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const colones = (n) => `₡${formatoMonto(n)}`;
 
-  const btnTerminarVenta = document.getElementById("finalizar-pedido");
+  //Sesión
+  const usuarioSesion = JSON.parse(sessionStorage.getItem("usuario"));
+  if (!usuarioSesion) {
+    alert("Sesión no encontrada. Volvé a iniciar sesión.");
+    window.location.href = "/index.html";
+    return;
+  }
+
+
+  const contenedorProductos = document.getElementById("productos-container");
+  const tablaDetalles       = document.getElementById("tabla-detalles");
+  const totalVentaSpan      = document.getElementById("total-pedido");
+  const btnTerminarVenta    = document.getElementById("finalizar-pedido");
+
+  const carrito = {}; // { [producto_id]: { nombre, precio, cantidad, producto_Id } }
+
   btnTerminarVenta.disabled = true;
 
   const verificarEstadoBoton = () => {
     const nombreCliente = document.getElementById("nombre-cliente").value.trim();
-    const metodoPago = document.getElementById("metodo-pago").value;
-    const hayProductos = Object.keys(carrito).length > 0;
-
+    const metodoPago    = document.getElementById("metodo-pago").value;
+    const hayProductos  = Object.keys(carrito).length > 0;
     btnTerminarVenta.disabled = !(nombreCliente && metodoPago && hayProductos);
   };
+
   const actualizarTabla = () => {
     tablaDetalles.innerHTML = "";
     let total = 0;
@@ -28,11 +43,11 @@ document.addEventListener("DOMContentLoaded", async () => {
       tdCantidad.textContent = item.cantidad;
 
       const tdDescuento = document.createElement("td");
-      tdDescuento.textContent = "₡0.00";
+      tdDescuento.textContent = colones(0);
 
       const tdSubtotal = document.createElement("td");
       const subtotal = item.precio * item.cantidad;
-      tdSubtotal.textContent = `₡${subtotal.toFixed(2)}`;
+      tdSubtotal.textContent = colones(subtotal);
 
       total += subtotal;
 
@@ -40,40 +55,32 @@ document.addEventListener("DOMContentLoaded", async () => {
       fila.appendChild(tdCantidad);
       fila.appendChild(tdDescuento);
       fila.appendChild(tdSubtotal);
-
       tablaDetalles.appendChild(fila);
-
-     
     });
 
-    document.getElementById("total-pedido").textContent = `₡${total.toFixed(2)}`;
-    totalVentaSpan.textContent = `₡${total.toFixed(2)}`;
-
-    // Habilitar o deshabilitar el botón de finalizar venta
+    totalVentaSpan.textContent = colones(total);
     verificarEstadoBoton();
   };
 
-  // Obtener productos del backend
+  //Cargar productos
   try {
-    const response = await fetch("http://localhost:5128/api/productos");
+    const response  = await fetch("http://localhost:5128/api/productos");
     const productos = await response.json();
 
     productos.forEach((producto) => {
-      const card = document.createElement("div");
+      const card  = document.createElement("div");
       card.className = "producto-card";
 
-
-
       const imagen = document.createElement("img");
-      imagen.src = `/src/Productos/${producto.nombre}.jpg`;
-      imagen.alt = producto.nombre;
+      imagen.src   = `/src/Productos/${producto.nombre}.jpg`;
+      imagen.alt   = producto.nombre;
       imagen.className = "imagen-producto";
 
       const nombre = document.createElement("p");
       nombre.textContent = producto.nombre;
 
       const precio = document.createElement("p");
-      precio.textContent = `Precio: ₡${producto.precio}`;
+      precio.textContent = `Precio: ${colones(producto.precio)}`;
 
       const controlCantidad = document.createElement("div");
       controlCantidad.className = "control-cantidad";
@@ -90,11 +97,11 @@ document.addEventListener("DOMContentLoaded", async () => {
       btnMas.addEventListener("click", () => {
         let cantidad = parseInt(cantidadSpan.textContent);
         cantidad++;
-        cantidadSpan.textContent = cantidad;
+        cantidadSpan.textContent = String(cantidad);
         carrito[producto.producto_id] = {
           nombre: producto.nombre,
-          precio: producto.precio,
-          cantidad: cantidad,
+          precio: Number(producto.precio),
+          cantidad,
           producto_Id: producto.producto_id,
         };
         actualizarTabla();
@@ -104,7 +111,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         let cantidad = parseInt(cantidadSpan.textContent);
         if (cantidad > 0) {
           cantidad--;
-          cantidadSpan.textContent = cantidad;
+          cantidadSpan.textContent = String(cantidad);
           if (cantidad === 0) {
             delete carrito[producto.producto_id];
           } else {
@@ -122,28 +129,27 @@ document.addEventListener("DOMContentLoaded", async () => {
       card.appendChild(imagen);
       card.appendChild(nombre);
       card.appendChild(controlCantidad);
-
       contenedorProductos.appendChild(card);
     });
   } catch (err) {
     console.error("Error al obtener productos:", err);
   }
 
-  // Finalizar Pedido
-  const modalExito = document.getElementById("modal-exito");
+  //Finalizar Pedido 
+  const modalExito  = document.getElementById("modal-exito");
   const cerrarModal = document.getElementById("cerrar-modal");
-  document.getElementById("nombre-cliente").addEventListener("input", verificarEstadoBoton);
-  document.getElementById("metodo-pago").addEventListener("change", verificarEstadoBoton);
+
+  document.getElementById("nombre-cliente").addEventListener("input",  verificarEstadoBoton);
+  document.getElementById("metodo-pago").addEventListener("change",    verificarEstadoBoton);
 
   btnTerminarVenta.addEventListener("click", async () => {
     const nombreCliente = document.getElementById("nombre-cliente").value.trim();
-    const metodoPago = document.getElementById("metodo-pago").value;
+    const metodoPago    = document.getElementById("metodo-pago").value;
 
     if (!nombreCliente || !metodoPago) {
       alert("Por favor, completá el nombre del cliente y método de pago.");
       return;
     }
-
     if (Object.keys(carrito).length === 0) {
       alert("El carrito está vacío");
       return;
@@ -154,14 +160,15 @@ document.addEventListener("DOMContentLoaded", async () => {
       cantidad: item.cantidad
     }));
 
-    const total = Object.values(carrito).reduce((acc, item) => acc + item.precio * item.cantidad, 0);
+    const total = Object.values(carrito)
+      .reduce((acc, item) => acc + (item.precio * item.cantidad), 0);
 
     const venta = {
       cliente: nombreCliente,
       metodo_Pago: metodoPago,
       detalleVenta: detalleFinal,
       total: total,
-      usuario_Id: 1, // ⚠️ Cambiar según el usuario actual
+      usuario_Id: Number(usuarioSesion.id),
       descuento_Aplicado: false,
       monto_Efectivo: metodoPago === "Efectivo" ? total : 0
     };
@@ -173,9 +180,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         body: JSON.stringify(venta)
       });
 
-      if (!response.ok) {
-        throw new Error("Hubo un problema al conectar con el servidor.");
-      }
+      if (!response.ok) throw new Error("Hubo un problema al conectar con el servidor.");
 
       // Mostrar modal
       modalExito.style.display = "block";
@@ -188,6 +193,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
       Object.keys(carrito).forEach(key => delete carrito[key]);
       actualizarTabla();
+      verificarEstadoBoton();
     } catch (error) {
       alert(error.message);
     }
@@ -196,6 +202,4 @@ document.addEventListener("DOMContentLoaded", async () => {
   cerrarModal.addEventListener("click", () => {
     modalExito.style.display = "none";
   });
-
-
 });

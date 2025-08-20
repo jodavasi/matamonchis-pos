@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MatamonchisAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c92c040d6cedb8e6d7810857b76ccf0cf0b7943f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b0f1a7bb5fe32f7bce2b4aab077d9d2e56eaa72d")]
 [assembly: System.Reflection.AssemblyProductAttribute("MatamonchisAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MatamonchisAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

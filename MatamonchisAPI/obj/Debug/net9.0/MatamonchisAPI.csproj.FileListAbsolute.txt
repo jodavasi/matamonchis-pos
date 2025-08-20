@@ -177,3 +177,5 @@ C:\Users\jodav\OneDrive\Escritorio\Matamonchis\matamonchis-pos\MatamonchisAPI\ob
 C:\Users\jodav\OneDrive\Escritorio\Matamonchis\matamonchis-pos\MatamonchisAPI\obj\Debug\net9.0\MatamonchisAPI.pdb
 C:\Users\jodav\OneDrive\Escritorio\Matamonchis\matamonchis-pos\MatamonchisAPI\obj\Debug\net9.0\MatamonchisAPI.genruntimeconfig.cache
 C:\Users\jodav\OneDrive\Escritorio\Matamonchis\matamonchis-pos\MatamonchisAPI\obj\Debug\net9.0\ref\MatamonchisAPI.dll
+C:\Users\jodav\OneDrive\Escritorio\Matamonchis\matamonchis-pos\MatamonchisAPI\bin\Debug\net9.0\package-lock.json
+C:\Users\jodav\OneDrive\Escritorio\Matamonchis\matamonchis-pos\MatamonchisAPI\bin\Debug\net9.0\Dapper.dll
