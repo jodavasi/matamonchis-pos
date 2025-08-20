@@ -57,23 +57,6 @@ html, body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Botones principales */
-.boton-opcion {
-  background-color: #fbdb6b;
-  color: #000;
-  border: none;
-  padding: 0.7rem 1.2rem;
-  border-radius: 10px;
-  font-weight: bold;
-  font-size: 0.95rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.boton-opcion:hover {
-  background-color: #facf39;
-}
-
 .logo-user-group {
   display: flex;
   align-items: center;
@@ -86,7 +69,7 @@ html, body {
   font-size: 16px;
 }
 
-#crear-usuario-btn, #crear-pedido-btn {
+#editar-usuarios-btn,#crear-usuario-btn, #crear-pedido-btn{
   background-color: #f9c307;
   color: #000;
   font-weight: bold;
@@ -99,7 +82,13 @@ html, body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-#crear-usuario-btn:hover, #crear-pedido-btn:hover {
+#editar-usuarios-btn:hover, #crear-usuario-btn:hover, #crear-pedido-btn:hover {
   background-color: #fbdb6b;
   transform: scale(1.05);
 }
+
+
+.chart-wrapper { max-width: 900px; margin: 0 auto; padding: 16px; }
+.chart-box { position: relative; height: 320px; }
+.hidden { display: none !important; }
+

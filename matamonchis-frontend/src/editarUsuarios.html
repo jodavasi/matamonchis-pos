@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Editar Usuarios</title>
+  <link rel="stylesheet" href="/src/style/styleEditUser.css"/>
+</head>
+<body>
+
+  <header class="matamonchis-header">
+    <a href="/src/mainMatamonchis.html" class="logo-link">
+      <img src="/src/Logo/LogoBW.png" class="logo-img" alt="Matamonchis">
+    </a>
+    <p id="user-info">Editar Usuarios</p>
+    <button class="btn-accion" id="btn-atras" type="button" onclick="location.href='/src/mainMatamonchis.html'">Atrás</button>
+  </header>
+
+  <main class="container">
+    <section class="usuario-container">
+      <h1>Lista de Usuarios</h1>
+
+      <table class="table" id="tabla-usuarios">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Usuario</th>
+            <th>Rol</th>
+            <th>Mail</th>
+            <th>Acción</th>
+            
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+
+    <section class="form" id="form-edicion" style="display:none;">
+      <h3>Editar usuario <span id="edit-id" class="muted"></span></h3>
+
+      <div class="row">
+        <input id="edit-nombre"   placeholder="Nombre" />
+        <input id="edit-username" placeholder="Username" />
+      </div>
+
+      <div class="row">
+        <select id="edit-rol">
+          <option value="admin">admin</option>
+          <option value="cajero">cajero</option>
+          <option value="vendedor">vendedor</option>
+        </select>
+        <input id="edit-mail" placeholder="Mail (opcional)" />
+      </div>
+
+      <input id="edit-password" type="password" placeholder="Nueva contraseña (opcional)" />
+
+      <button id="guardar-cambios" class="btn-accion" type="button">Guardar cambios</button>
+    </section>
+  </main>
+
+  <script>window.API_BASE = "http://localhost:5128";</script>
+  <script type="module" src="/src/editarUsuarios.js"></script>
+</body>
+</html>

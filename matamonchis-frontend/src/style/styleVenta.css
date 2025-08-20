@@ -233,23 +233,6 @@ button:disabled {
   font-size: 16px;
 }
 
-#crear-usuario-btn, #crear-pedido-btn {
-  background-color: #f9c307;
-  color: #000;
-  font-weight: bold;
-  font-size: 18px;
-  padding: 16px 32px;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-#crear-usuario-btn:hover, #crear-pedido-btn:hover {
-  background-color: #fbdb6b;
-  transform: scale(1.05);
-}
 
 .modal {
   display: none;

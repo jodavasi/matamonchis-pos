@@ -1,50 +1,40 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="UTF-8" />
   <title>Dashboard</title>
   <link rel="stylesheet" href="/src/style/styleMata.css" />
 </head>
-
 <body>
   <header class="matamonchis-header">
     <a href="mainMatamonchis.html" class="logo-link">
       <img src="/src/Logo/LogoBW.png" alt="Matamonchis Logo" class="logo-img" />
     </a>
-
     <p id="user-info">Usuario: ...</p>
-
     <button id="logout-btn">Cerrar sesión</button>
   </header>
 
   <div class="botones-container">
-    <button id="crear-usuario-btn" class="boton-opcion">Crear Usuario</button>
-    <button id="crear-pedido-btn" class="boton-opcion">🛒 Nueva Venta</button>
+    <button id="crear-usuario-btn"  class="boton-opcion" type="button">Crear Usuario</button>
+    <button id="editar-usuarios-btn"  class="boton-opcion" type="button">Editar Usuario</button>
+    <button id="crear-pedido-btn"    class="boton-opcion" type="button">Nueva Venta</button>
   </div>
 
-  <div class="chart-wrapper">
-    <canvas id="ventasPorVendedor"></canvas>
-    <canvas id="ventasPorVendedor"></canvas>
-    <section id="cards-analytics" class="cards">
-      <div class="card">
-        <h3 class="card-title">Ventas por Vendedor</h3>
+  <section id="cards-analytics" class="cards">
+    <div class="card">
+      <div class="chart-wrapper"> 
         <div class="chart-box">
           <canvas id="ventasChart"></canvas>
         </div>
-
       </div>
+    </div>
+  </section>
 
-
-  </div>
-
-
-  <!-- URL base de tu API (ajústala a la real) -->
+  <!-- URL base de tu API -->
   <script>window.API_BASE = "http://localhost:5128";</script>
 
-  <!-- Chart.js (debe ir antes del main) -->
+  <!-- Chart.js (antes de tu main) -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script type="module" src="/src/mainMatamonchis.js"></script>
 </body>
-
 </html>
