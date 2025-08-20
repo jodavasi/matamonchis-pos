@@ -351,3 +351,27 @@ button:disabled {
   outline: none;
   box-shadow: 0 0 5px rgba(255, 102, 0, 0.5);
 }
+
+.tiene-descuento {
+  font-weight: 700;
+}
+
+/* Marca visual en la card cuando hay 2x1 activo */
+.producto-card.promo-activa {
+  outline: 2px dashed #1abc9c;
+  outline-offset: 4px;
+  position: relative;
+}
+
+.badge-gratis {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: #1abc9c;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  box-shadow: 0 2px 6px rgba(0,0,0,.15);
+}

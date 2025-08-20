@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", async () => {
-  //Helper de formato
+  // Helper de formato
   const formatoMonto = (n) =>
     Number(n || 0).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   const colones = (n) => `₡${formatoMonto(n)}`;
 
-  //Sesión
+  // Sesión
   const usuarioSesion = JSON.parse(sessionStorage.getItem("usuario"));
   if (!usuarioSesion) {
     alert("Sesión no encontrada. Volvé a iniciar sesión.");
@@ -12,14 +12,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     return;
   }
 
-
   const contenedorProductos = document.getElementById("productos-container");
   const tablaDetalles       = document.getElementById("tabla-detalles");
   const totalVentaSpan      = document.getElementById("total-pedido");
   const btnTerminarVenta    = document.getElementById("finalizar-pedido");
 
-  const carrito = {}; // { [producto_id]: { nombre, precio, cantidad, producto_Id } }
-
+  // Estructura del carrito: { [producto_id]: { nombre, precio, cantidad, producto_Id } }
+  const carrito = {};
   btnTerminarVenta.disabled = true;
 
   const verificarEstadoBoton = () => {
@@ -29,9 +28,34 @@ document.addEventListener("DOMContentLoaded", async () => {
     btnTerminarVenta.disabled = !(nombreCliente && metodoPago && hayProductos);
   };
 
+  // ======= PROMO 2x1 (mismo SKU) =======
+  // Para cada producto: por cada par de unidades, 1 es gratis.
+  // freeUnits = floor(cantidad / 2)
+  // descuento = freeUnits * precio
+  // subtotal  = cantidad * precio - descuento
+  const calcularDescuentoItem = (item) => {
+    const freeUnits = Math.floor((item.cantidad || 0) / 2);
+    const descuento = freeUnits * Number(item.precio || 0);
+    const subtotal  = (Number(item.precio || 0) * (item.cantidad || 0)) - descuento;
+    return { freeUnits, descuento, subtotal };
+  };
+
+  const calcularTotales = () => {
+    let totalDescuento = 0;
+    let total = 0;
+
+    Object.values(carrito).forEach(item => {
+      const { descuento, subtotal } = calcularDescuentoItem(item);
+      totalDescuento += descuento;
+      total += subtotal;
+    });
+
+    return { totalDescuento, total };
+  };
+
   const actualizarTabla = () => {
     tablaDetalles.innerHTML = "";
-    let total = 0;
+    const { total } = calcularTotales();
 
     Object.values(carrito).forEach(item => {
       const fila = document.createElement("tr");
@@ -43,26 +67,47 @@ document.addEventListener("DOMContentLoaded", async () => {
       tdCantidad.textContent = item.cantidad;
 
       const tdDescuento = document.createElement("td");
-      tdDescuento.textContent = colones(0);
+      const { descuento, subtotal, freeUnits } = calcularDescuentoItem(item);
+      tdDescuento.textContent = colones(descuento);
+      tdDescuento.classList.toggle("tiene-descuento", descuento > 0);
 
       const tdSubtotal = document.createElement("td");
-      const subtotal = item.precio * item.cantidad;
       tdSubtotal.textContent = colones(subtotal);
-
-      total += subtotal;
 
       fila.appendChild(tdNombre);
       fila.appendChild(tdCantidad);
       fila.appendChild(tdDescuento);
       fila.appendChild(tdSubtotal);
       tablaDetalles.appendChild(fila);
+
+      // Actualizar UI de la tarjeta (badge 2x1 activo si hay unidades gratis)
+      marcarCardGratis(item.producto_Id, freeUnits > 0);
     });
 
     totalVentaSpan.textContent = colones(total);
     verificarEstadoBoton();
   };
 
-  //Cargar productos
+  // Marca visual en la card cuando hay 2x1 activo para ese SKU
+  const marcarCardGratis = (productoId, activo) => {
+    const card = contenedorProductos.querySelector(`.producto-card[data-producto-id="${productoId}"]`);
+    if (!card) return;
+    card.classList.toggle("promo-activa", activo);
+
+    let badge = card.querySelector(".badge-gratis");
+    if (activo) {
+      if (!badge) {
+        badge = document.createElement("span");
+        badge.className = "badge-gratis";
+        badge.textContent = "2x1 ACTIVO";
+        card.appendChild(badge);
+      }
+    } else {
+      if (badge) badge.remove();
+    }
+  };
+
+  // Cargar productos
   try {
     const response  = await fetch("http://localhost:5128/api/productos");
     const productos = await response.json();
@@ -70,6 +115,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     productos.forEach((producto) => {
       const card  = document.createElement("div");
       card.className = "producto-card";
+      card.dataset.productoId = producto.producto_id; // para marcar 2x1 en UI
 
       const imagen = document.createElement("img");
       imagen.src   = `/src/Productos/${producto.nombre}.jpg`;
@@ -86,18 +132,21 @@ document.addEventListener("DOMContentLoaded", async () => {
       controlCantidad.className = "control-cantidad";
 
       const btnMenos = document.createElement("button");
-      btnMenos.textContent = "-";
+      btnMenos.textContent = "−";
+      btnMenos.setAttribute("aria-label", "Disminuir");
 
       const cantidadSpan = document.createElement("span");
       cantidadSpan.textContent = "0";
 
       const btnMas = document.createElement("button");
       btnMas.textContent = "+";
+      btnMas.setAttribute("aria-label", "Aumentar");
 
       btnMas.addEventListener("click", () => {
         let cantidad = parseInt(cantidadSpan.textContent);
         cantidad++;
         cantidadSpan.textContent = String(cantidad);
+
         carrito[producto.producto_id] = {
           nombre: producto.nombre,
           precio: Number(producto.precio),
@@ -135,7 +184,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.error("Error al obtener productos:", err);
   }
 
-  //Finalizar Pedido 
+  // Finalizar Pedido 
   const modalExito  = document.getElementById("modal-exito");
   const cerrarModal = document.getElementById("cerrar-modal");
 
@@ -155,21 +204,22 @@ document.addEventListener("DOMContentLoaded", async () => {
       return;
     }
 
+    // Detalle (mismas cantidades seleccionadas)
     const detalleFinal = Object.values(carrito).map(item => ({
       producto_Id: item.producto_Id,
       cantidad: item.cantidad
     }));
 
-    const total = Object.values(carrito)
-      .reduce((acc, item) => acc + (item.precio * item.cantidad), 0);
+    // Total aplicando 2x1
+    const { totalDescuento, total } = calcularTotales();
 
     const venta = {
       cliente: nombreCliente,
       metodo_Pago: metodoPago,
       detalleVenta: detalleFinal,
-      total: total,
+      total: total,                            // total ya con 2x1 aplicado
       usuario_Id: Number(usuarioSesion.id),
-      descuento_Aplicado: false,
+      descuento_Aplicado: totalDescuento > 0,  // bandera informativa
       monto_Efectivo: metodoPago === "Efectivo" ? total : 0
     };
 
